@@ -55,9 +55,8 @@ const selectStyles = {
 // =====================================================================================
 
 const Home = () => {
-
+  const START_CITY = 'Blackwater'
   const [cities, setCities] = useState([]);
-  const [startCity, setStartCity] = useState('');
   const [endCity, setEndCity] = useState('');
   const [path, setPath] = useState();
   const [distance, setDistance] = useState();
@@ -98,7 +97,7 @@ const Home = () => {
   }, [])
 
   const findPath = async () => {
-    if(startCity === '' || endCity === ''){
+    if(endCity === ''){
       setIsError(true);
       return;
     }
@@ -107,7 +106,7 @@ const Home = () => {
 
     try {
       const { data } = await api.post('/path', {
-          start: startCity,
+          start: START_CITY,
           end: endCity
       });
 
@@ -131,17 +130,6 @@ const Home = () => {
             <IntroText>Bem-vindo(a) ao projeto Red Dead Map!<br /> Neste projeto, você pode encontrar o menor caminho entre uma cidade e outra do mapa do jogo Red Dead Redemption II.</IntroText>
           </IntroSection>
           <SelectSection>
-            <SelectContainer>
-              <Select
-                options={cities}
-                placeholder='Escolha uma cidade inicial...'
-                styles={selectStyles}
-                onChange={(e)=>{
-                    setStartCity(e.value);
-                }}
-                style={{width: '400px'}}
-              />
-            </SelectContainer>
             <SelectContainer>
               <Select
                 options={cities}
