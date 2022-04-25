@@ -102,7 +102,7 @@ class RedDeadCitiesView():
         return nodes, 200
 
     @app.route('/profit', methods=['POST'])
-    def post_knapsack() -> list:
+    def post_knapsack() -> dict:
         """returns max profit from knapsack"""
         body = request.get_json()
 
