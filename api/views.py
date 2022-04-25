@@ -100,3 +100,14 @@ class RedDeadCitiesView():
             return json.dumps(error_response), 404
 
         return nodes, 200
+
+    @app.route('/profit', methods=['POST'])
+    def post_knapsack() -> list:
+        """returns max profit from knapsack"""
+        body = request.get_json()
+
+        max_weight = body.get("max_weight")
+        weights = body.get("weights")
+        values = body.get("values")
+
+        return json.dumps(graph.knapSack(max_weight, weights, values, len(values)))
