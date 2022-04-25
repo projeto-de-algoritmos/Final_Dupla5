@@ -137,16 +137,6 @@ const Home = () => {
     setKnapsack([...knapsackCopy]);
   }
 
-  // @REMOVE later
-  useEffect(()=>{
-    console.log('knapsack', knapsack);
-  }, [knapsack])
-
-  // @REMOVE later
-  useEffect(()=>{
-    console.log('profit', profit);
-  }, [profit])
-
   const findPath = async () => {
     try {
       const { data } = await api.post('/path', {
