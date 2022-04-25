@@ -65,12 +65,14 @@ const Home = () => {
   const [knapsack, setKnapsack] = useState([]);
   const [distance, setDistance] = useState();
   const [profit, setProfit] = useState();
-  const [name, setName] = useState();
-  const [weight, setWeight] = useState();
-  const [value, setValue] = useState();
+  const [name, setName] = useState('');
+  const [weight, setWeight] = useState('');
+  const [value, setValue] = useState('');
   const [maxWeight, setMaxWeight] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isProductError, setIsProductError] = useState(false);
+  const [isProductIntError, setIsProductIntError] = useState(false);
 
   const handleCloseModal = async () => {
       setIsOpen(false);
@@ -106,9 +108,19 @@ const Home = () => {
   }, [])
 
   const addProduct = () => {
-    if(name===null || weight === null || value === null){
-      return null;
+    if(name.length === 0 || weight.length === 0 || value.length === 0){
+      setIsProductError(true);
+      return;
     };
+
+    if(!Number.isInteger(parseInt(weight)) || !Number.isInteger(parseInt(value))){
+      setIsProductIntError(true);
+      return;
+    };
+
+
+    setIsProductError(false);
+    setIsProductIntError(false);
 
     const data = {
       name,
@@ -136,13 +148,6 @@ const Home = () => {
   }, [profit])
 
   const findPath = async () => {
-    if(endCity === ''){
-      setIsError(true);
-      return;
-    }
-
-    setIsError(false);
-
     try {
       const { data } = await api.post('/path', {
           start: START_CITY,
@@ -189,6 +194,11 @@ const Home = () => {
   }
 
   const handleFindBestPath = () => {
+    if(!knapsack.length>0 || endCity === ''){
+      setIsError(true);
+      return;
+    }
+    setIsError(false);
     findProfit();
     findPath();
   }
@@ -236,7 +246,17 @@ const Home = () => {
           </InputSection>
           {isError && (
             <ErrorMessageContainer>
-              <ErrorMessage>Pesquisa inválida, escolha as cidades novamente.</ErrorMessage>
+              <ErrorMessage>Pesquisa inválida, preencha todos os campos.</ErrorMessage>
+            </ErrorMessageContainer>
+          )}
+          {isProductError && (
+            <ErrorMessageContainer>
+              <ErrorMessage>Preencha todos os campos de produto antes de adicionar.</ErrorMessage>
+            </ErrorMessageContainer>
+          )}
+          {isProductIntError && (
+            <ErrorMessageContainer>
+              <ErrorMessage>O peso e o valor do produto devem ser números inteiros.</ErrorMessage>
             </ErrorMessageContainer>
           )}
           {knapsack.length>0 && <ProductsList items={knapsack} onDelete={removeProduct} />}
