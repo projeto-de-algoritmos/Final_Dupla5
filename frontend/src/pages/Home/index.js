@@ -171,11 +171,9 @@ const Home = () => {
         weights.push(parseInt(e.weight));
         values.push(parseInt(e.value));
       })
-
-      console.log(maxWeight, weights, values )
       
       const { data } = await api.post('/profit', {
-          max_weight: maxWeight,
+          max_weight: parseInt(maxWeight),
           weights,
           values
       });
@@ -245,8 +243,8 @@ const Home = () => {
           <MapSection src={MapRD} />
           <Modal isOpen={isOpen} onRequestClose={handleCloseModal} style={customStyles}>
               <PathSection>
-              {path && (
-                  <List items={path} distance={distance} title='Melhor Rota' imageSrc={horseMan} />
+              {path && profit && (
+                  <List items={path} distance={distance} profit={profit} title='Melhor Rota' imageSrc={horseMan} />
                   )}
               </PathSection>
               <Button text='Fechar' onClick={handleCloseModal} />

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container, TitleContainer, Title, ListContainer, ItemsContainer, ItemsWrapper, Item, DistanceText, ImageContainer, Image } from './styles';
+import { Container, TitleContainer, Title, ListContainer, ItemsContainer, ItemsWrapper, TextWrapper, Item, DistanceText, ProfitText, ImageContainer, Image } from './styles';
 
-const List = ({items, title, imageSrc, distance}) => {
+const List = ({items, title, imageSrc, distance, profit}) => {
   return (
     <Container>
       {title && 
@@ -17,7 +17,10 @@ const List = ({items, title, imageSrc, distance}) => {
               <Item key={index}>{index+1}. {text}</Item>
             ))}
           </ItemsWrapper>
-          <DistanceText>Distância total: {distance} m</DistanceText>
+          <TextWrapper>
+            <DistanceText>Distância total: {distance} m</DistanceText>
+            <ProfitText>Lucro máximo: {profit} $</ProfitText>
+          </TextWrapper>
         </ItemsContainer>
         <ImageContainer>
           <Image alt='Horse Man' src={imageSrc} />

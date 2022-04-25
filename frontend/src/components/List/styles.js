@@ -44,6 +44,9 @@ export const ItemsContainer = styled.ul`
 export const ItemsWrapper = styled.ul`
 `;
 
+export const TextWrapper = styled.div`
+`;
+
 export const Item = styled.li`
   margin: 7px 0 7px 0;
 `;
@@ -51,6 +54,11 @@ export const Item = styled.li`
 export const DistanceText = styled.p`
   margin-top: 20px;
   color: ${colors.red};
+`;
+
+export const ProfitText = styled.p`
+  margin-top: 5px;
+  color: ${colors.yellow.dark};
 `;
 
 export const ImageContainer = styled.div`
