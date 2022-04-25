@@ -11,6 +11,7 @@ import { colors } from '../../theme/colors';
 import Select from 'react-select';
 import { Button } from '../../components/Button';
 import { List } from '../../components/List';
+import { ProductsList } from '../../components/ProductsList';
 import { Input } from '../../components/Input';
 
 import { InputSection, IntroSection, IntroText, SelectSection, PathSection, MapSection, Container, Footer, SelectContainer, ErrorMessageContainer, ErrorMessage } from './styles';
@@ -104,7 +105,7 @@ const Home = () => {
     loadCities();
   }, [])
 
-  const addProduct = async () => {
+  const addProduct = () => {
     if(name===null || weight === null || value === null){
       return null;
     };
@@ -116,6 +117,12 @@ const Home = () => {
     };
 
     setKnapsack([...knapsack, data]);
+  }
+
+  const removeProduct = (index) => {
+    const knapsackCopy = knapsack;
+    knapsackCopy.splice(index,1);
+    setKnapsack([...knapsackCopy]);
   }
 
   // @REMOVE later
@@ -234,6 +241,7 @@ const Home = () => {
               <ErrorMessage>Pesquisa inválida, escolha as cidades novamente.</ErrorMessage>
             </ErrorMessageContainer>
           )}
+          {knapsack.length>0 && <ProductsList items={knapsack} onDelete={removeProduct} />}
           <MapSection src={MapRD} />
           <Modal isOpen={isOpen} onRequestClose={handleCloseModal} style={customStyles}>
               <PathSection>
