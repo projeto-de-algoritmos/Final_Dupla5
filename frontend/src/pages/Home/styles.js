@@ -20,7 +20,7 @@ export const IntroSection = styled.div`
 `;
 
 export const IntroText = styled.p`
-  color: colors.white;
+  color: ${colors.white};
 `;
 
 export const SelectSection = styled.div`
@@ -64,3 +64,5 @@ export const Footer = styled.footer`
   color: white;
   font-family: 'Roboto';
 `;
+
+export const Input = styled.input``;

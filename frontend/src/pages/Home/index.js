@@ -12,7 +12,7 @@ import Select from 'react-select';
 import { Button } from '../../components/Button';
 import { List } from '../../components/List';
 
-import { IntroSection, IntroText, SelectSection, PathSection, MapSection, Container, Footer, SelectContainer, ErrorMessageContainer, ErrorMessage } from './styles';
+import { IntroSection, IntroText, SelectSection, PathSection, MapSection, Container, Footer, SelectContainer, ErrorMessageContainer, ErrorMessage, Input } from './styles';
 
 // custom styles
 const customStyles = {
@@ -56,10 +56,17 @@ const selectStyles = {
 
 const Home = () => {
   const START_CITY = 'Blackwater'
+
   const [cities, setCities] = useState([]);
   const [endCity, setEndCity] = useState('');
   const [path, setPath] = useState();
+  const [knapsack, setKnapsack] = useState([]);
   const [distance, setDistance] = useState();
+  const [profit, setProfit] = useState();
+  const [name, setName] = useState();
+  const [weight, setWeight] = useState();
+  const [value, setValue] = useState();
+  const [maxWeight, setMaxWeight] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -96,6 +103,30 @@ const Home = () => {
     loadCities();
   }, [])
 
+  const addProduct = async () => {
+    if(name===null || weight === null || value === null){
+      return null;
+    };
+
+    const data = {
+      name,
+      weight,
+      value
+    };
+
+    setKnapsack([...knapsack, data]);
+  }
+
+  // @REMOVE later
+  useEffect(()=>{
+    console.log('knapsack', knapsack);
+  }, [knapsack])
+
+  // @REMOVE later
+  useEffect(()=>{
+    console.log('profit', profit);
+  }, [profit])
+
   const findPath = async () => {
     if(endCity === ''){
       setIsError(true);
@@ -123,6 +154,41 @@ const Home = () => {
     }
   }
 
+  const findProfit = async () => {
+    try {
+      let weights = []
+      let values = [];
+
+      knapsack.forEach((e)=>{
+        weights.push(parseInt(e.weight));
+        values.push(parseInt(e.value));
+      })
+
+      console.log(maxWeight, weights, values )
+      
+      const { data } = await api.post('/profit', {
+          max_weight: maxWeight,
+          weights,
+          values
+      });
+
+      console.log(data);
+      
+      setProfit(data)
+      setIsOpen(true);
+  
+      return data;
+    } catch(e) {
+      console.error(e);
+      setIsError(true);
+    }
+  }
+
+  const handleFindBestPath = () => {
+    findProfit();
+    findPath();
+  }
+
   return (
       <>
         <Container>
@@ -140,7 +206,30 @@ const Home = () => {
                 }}
               />
             </SelectContainer>
-            <Button text='Localizar' onClick={findPath} />
+            <SelectContainer>
+              <Input placeholder="Máximo de carga" 
+                  value={maxWeight}
+                  onChange={e=>setMaxWeight(e.target.value)}
+                  style={{marginBottom: "10px"}}
+              />
+              <Input placeholder="Nome da mercadoria" 
+                  value={name}
+                  onChange={e=>setName(e.target.value)}
+                  style={{marginBottom: "10px"}}
+              />
+              <Input placeholder="Peso da mercadoria" 
+                  value={weight}
+                  onChange={e=>setWeight(e.target.value)}
+                  style={{marginBottom: "5px"}}
+              />
+              <Input placeholder="Valor da mercadoria" 
+                  value={value}
+                  onChange={e=>setValue(e.target.value)}
+                  style={{marginBottom: "5px"}}
+              />
+              <Button text='Adicionar' type="submit" onClick={addProduct} />
+            </SelectContainer>
+            <Button text='Localizar' onClick={handleFindBestPath} />
           </SelectSection>
           {isError && (
             <ErrorMessageContainer>
