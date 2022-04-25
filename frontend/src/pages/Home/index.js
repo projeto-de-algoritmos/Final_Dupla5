@@ -11,8 +11,9 @@ import { colors } from '../../theme/colors';
 import Select from 'react-select';
 import { Button } from '../../components/Button';
 import { List } from '../../components/List';
+import { Input } from '../../components/Input';
 
-import { IntroSection, IntroText, SelectSection, PathSection, MapSection, Container, Footer, SelectContainer, ErrorMessageContainer, ErrorMessage, Input } from './styles';
+import { InputSection, IntroSection, IntroText, SelectSection, PathSection, MapSection, Container, Footer, SelectContainer, ErrorMessageContainer, ErrorMessage } from './styles';
 
 // custom styles
 const customStyles = {
@@ -171,8 +172,6 @@ const Home = () => {
           weights,
           values
       });
-
-      console.log(data);
       
       setProfit(data)
       setIsOpen(true);
@@ -210,27 +209,26 @@ const Home = () => {
               <Input placeholder="Máximo de carga" 
                   value={maxWeight}
                   onChange={e=>setMaxWeight(e.target.value)}
-                  style={{marginBottom: "10px"}}
+                  style={{width: "330px"}}
               />
-              <Input placeholder="Nome da mercadoria" 
-                  value={name}
-                  onChange={e=>setName(e.target.value)}
-                  style={{marginBottom: "10px"}}
-              />
-              <Input placeholder="Peso da mercadoria" 
-                  value={weight}
-                  onChange={e=>setWeight(e.target.value)}
-                  style={{marginBottom: "5px"}}
-              />
-              <Input placeholder="Valor da mercadoria" 
-                  value={value}
-                  onChange={e=>setValue(e.target.value)}
-                  style={{marginBottom: "5px"}}
-              />
-              <Button text='Adicionar' type="submit" onClick={addProduct} />
             </SelectContainer>
             <Button text='Localizar' onClick={handleFindBestPath} />
           </SelectSection>
+          <InputSection>
+            <Input placeholder="Nome da mercadoria" 
+                value={name}
+                onChange={e=>setName(e.target.value)}
+            />
+            <Input placeholder="Peso da mercadoria" 
+                value={weight}
+                onChange={e=>setWeight(e.target.value)}
+            />
+            <Input placeholder="Valor da mercadoria" 
+                value={value}
+                onChange={e=>setValue(e.target.value)}
+            />
+            <Button text='Adicionar' onClick={addProduct} style={{marginLeft: '10px'}} />
+          </InputSection>
           {isError && (
             <ErrorMessageContainer>
               <ErrorMessage>Pesquisa inválida, escolha as cidades novamente.</ErrorMessage>

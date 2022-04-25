@@ -34,6 +34,13 @@ export const SelectContainer = styled.div`
   width: 330px;
 `
 
+export const InputSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+`;
+
 export const ErrorMessageContainer = styled.div`
   align-self: start;
   margin: 10px 0 0 545px;
