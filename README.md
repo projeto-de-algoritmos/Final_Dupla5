@@ -21,6 +21,10 @@ Um lojista do universo do jogo Red Dead Redemption II possui uma loja na cidade 
 ![Screenshot 2](./github/screenshot2.png)
 ![Screenshot 3](./github/screenshot3.png)
 
+## Apresentação
+
+A apresentação do projeto pode ser vista no arquivo Apresentação.mp4 ou por este [link](https://youtu.be/0u_kBueElcY).
+
 ## Instalação 
 **Linguagem**: python (back-end) & javascript (front-end)<br>
 **Framework**: flask & react js<br>
