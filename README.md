@@ -17,6 +17,10 @@ Um lojista do universo do jogo Red Dead Redemption II possui uma loja na cidade 
 
 ## Screenshots
 
+![Screenshot 1](./github/screenshot1.png)
+![Screenshot 2](./github/screenshot2.png)
+![Screenshot 3](./github/screenshot3.png)
+
 ## Instalação 
 **Linguagem**: python (back-end) & javascript (front-end)<br>
 **Framework**: flask & react js<br>
@@ -49,10 +53,8 @@ $ yarn start
 E acessar o endereço `http://localhost:3000` no seu navegador.
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+A partir da interface web, adicione produtos disponíveis, atribuindo um nome, um peso e um valor para cada produto, juntamente com o peso máximo suportado e a cidade de destino. Com tudo preenchido, o botão "Localizar" irá mostrar a melhor rota para o destino juntamente com o lucro total máximo calculado a partir do peso e valor dos produtos.
 
 
 
