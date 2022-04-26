@@ -197,7 +197,7 @@ const Home = () => {
       <>
         <Container>
           <IntroSection>
-            <IntroText>Bem-vindo(a) ao projeto Red Dead Map!<br /> Neste projeto, você pode encontrar o menor caminho entre uma cidade e outra do mapa do jogo Red Dead Redemption II.</IntroText>
+            <IntroText>Bem-vindo(a) ao projeto Red Dead Storedemption!<br /> Neste projeto, você, como um lojista do jogo Red Dead Redemption II que tem uma loja na cidade Blackwater, pode adicionar produtos disponíveis para venda e descobrir qual a melhor rota de entrega para outra cidade junto com o maior lucro possível dado um peso máximo de transporte.</IntroText>
           </IntroSection>
           <SelectSection>
             <SelectContainer>
